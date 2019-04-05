@@ -18,7 +18,7 @@ class CreateCarsTable extends Migration
             $table->string('brand');
             $table->string('model');
             $table->year('year');
-            $table->integer('maxSpeed');
+            $table->integer('maxSpeed')->nullable();
             $table->boolean('isAutomatic');
             $table->string('engine');
             $table->integer('numberOfDoors');
