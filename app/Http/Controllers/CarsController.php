@@ -14,17 +14,7 @@ class CarsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Car::all();
     }
 
     /**
@@ -35,7 +25,12 @@ class CarsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newCar = new Car($request->all());
+        if ($newCar->save())
+        {
+            return $newCar;
+        }
+        return null;
     }
 
     /**
@@ -46,18 +41,7 @@ class CarsController extends Controller
      */
     public function show(Car $car)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Car  $car
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Car $car)
-    {
-        //
+        return $car;
     }
 
     /**
@@ -69,7 +53,8 @@ class CarsController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        $car->update($request->all());
+        return $car;
     }
 
     /**
@@ -80,6 +65,10 @@ class CarsController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        if ($car->delete())
+        {
+            return 'Car with id: '.$car->id.' has been deleted';
+        }
+        return null;
     }
 }
