@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Http\Services\CarsService;
 use App\Http\Services\ValidationService;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,11 @@ class CarsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->skip && $request->take) {
+            return CarsService::paginate($request);
+        }
         return Car::all();
     }
 
